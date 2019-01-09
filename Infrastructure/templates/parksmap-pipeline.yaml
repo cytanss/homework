@@ -1,0 +1,19 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "parksmap-pipeline"
+spec:
+  source:
+    git:
+      uri: "https://github.com/tancheeyong/advdev_homework.git"
+      ref: "40h"
+  strategy:
+    jenkinsPipelineStrategy:
+      env:
+         - name: GUID
+           value: "tcy"
+         - name: CLUSTER
+           value: "na311.openshift.opentlc.com"
+         - name: REPO
+           value: "https://github.com/tancheeyong/advdev_homework.git"
+      jenkinsfilePath: ParksMap/Jenkinsfile

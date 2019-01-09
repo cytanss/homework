@@ -1,0 +1,21 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "mlbparks-pipeline"
+spec:
+  source:
+    git:
+      uri: "https://github.com/tancheeyong/advdev_homework.git"
+  strategy:
+    jenkinsPipelineStrategy:
+      env:
+         - name: GUID
+//          value: ${GUID}
+           value: "tcy"
+         - name: CLUSTER
+//           value: ${CLUSTER}
+           value: "na311.openshift.opentlc.com"
+         - name: REPO
+//           value: ${REPO}
+           value: "https://github.com/tancheeyong/advdev_homework.git"
+      jenkinsfilePath: MLBParks/Jenkinsfile
