@@ -148,7 +148,7 @@ podTemplate(
     echo "Switching Production application to ${destApp}."
     sh "oc delete svc ${activeApp} -n ${GUID}-parks-prod"
     sh "oc patch route mlbparks -n ${GUID}-parks-prod -p '{\"spec\":{\"to\":{\"name\":\"" + destApp + "\"}}}'"
-    sleep 20
+    sleep 30
     sh "curl http://mlbparks-${GUID}-parks-prod.apps.${CLUSTER}/ws/data/load/ | grep -q 'Items inserted in database: 30'"
   }
     
