@@ -5,14 +5,14 @@ metadata:
 spec:
   source:
     git:
-      uri: "https://github.com/tancheeyong/advdev_homework.git"
+      uri: "https://github.com/tancheeyong/homework.git"
   strategy:
     jenkinsPipelineStrategy:
       env:
          - name: GUID
-           value: "tcy"
+           value: ${GUID}
          - name: CLUSTER
-           value: "na311.openshift.opentlc.com"
+           value: ${CLUSTER}
          - name: REPO
-           value: "https://github.com/tancheeyong/advdev_homework.git"
+           value: ${REPO}
       jenkinsfilePath: ParksMap/Jenkinsfile
