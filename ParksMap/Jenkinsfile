@@ -23,7 +23,7 @@ podTemplate(
 
 def mvnCmd = "mvn -s ./nexus_settings.xml"
   stage('Checkout Source') {
-    git url: 'https://github.com/tancheeyong/advdev_homework.git'
+    git url: 'https://github.com/tancheeyong/homework.git'
   }
 
   def groupId    = getGroupIdFromPom("./ParksMap/pom.xml")
