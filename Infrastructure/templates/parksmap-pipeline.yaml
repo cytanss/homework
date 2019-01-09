@@ -6,7 +6,6 @@ spec:
   source:
     git:
       uri: "https://github.com/tancheeyong/advdev_homework.git"
-      ref: "40h"
   strategy:
     jenkinsPipelineStrategy:
       env:
