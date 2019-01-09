@@ -26,10 +26,10 @@ echo "Setting up Nexus in project $GUID-nexus"
 # done
 
 # Ideally just calls a template
-# oc new-app -f ../templates/nexus.yaml --param .....
+# oc new-app -f ./Infrastructure/templates/nexus.yaml --param .....
 
 # To be Implemented by Student
-oc new-app -f ../templates/nexus3-persistent-template.yaml -n $GUID-nexus
+oc new-app -f ./Infrastructure/templates/nexus3-persistent-template.yaml -n $GUID-nexus
 while : ; do
   echo "Checking if Nexus is Ready..."
   oc get pod -n ${GUID}-nexus|grep 'nexus3\-'|grep -v deploy|grep "1/1"

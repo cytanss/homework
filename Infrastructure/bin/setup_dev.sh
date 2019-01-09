@@ -15,7 +15,7 @@ echo "Setting up Parks Development Environment in project ${GUID}-parks-dev"
 oc policy add-role-to-user edit system:serviceaccount:${GUID}-jenkins:jenkins -n ${GUID}-parks-dev
 oc policy add-role-to-user view --serviceaccount=default -n ${GUID}-parks-dev
 
-oc new-app -f ../templates/mongodb-persistent-template.json -n ${GUID}-parks-dev \
+oc new-app -f ./Infrastructure/templates/mongodb-persistent-template.json -n ${GUID}-parks-dev \
 --param MONGODB_USER="mongodb" \
 --param MONGODB_PASSWORD="mongodb" \
 --param MONGODB_DATABASE="parks" \
