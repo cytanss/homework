@@ -40,3 +40,12 @@ oc create -f ./Infrastructure/templates/parksmap-pipeline.yaml -n ${GUID}-jenkin
 oc set env bc/mlbparks-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
 oc set env bc/nationalparks-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
 oc set env bc/parksmap-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
+
+while : ; do
+   echo "Checking if jenkins-agent-appdev is Ready..."
+   oc get pod -n ${GUID}-jenkins|grep '\jenkins-agent-appdev\-'|grep "Completed"
+   [[ "$?" == "1" ]] || break
+   echo "$?" == "1"
+   echo "...no. Sleeping 10 seconds."
+   sleep 10
+ done
