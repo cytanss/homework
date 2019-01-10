@@ -26,11 +26,11 @@ oc policy add-role-to-user view --serviceaccount=default -n ${GUID}-parks-prod
 # MLBPark
 oc new-app ${GUID}-parks-dev/mlbparks:0.0 --name=mlbparks-blue --allow-missing-imagestream-tags=true -n ${GUID}-parks-prod
 oc set triggers dc/mlbparks-blue  --remove-all -n ${GUID}-parks-prod
-oc set resources dc/mlbparks-blue --limits=memory=1Gi -n ${GUID}-parks-prod
+oc set resources dc/mlbparks-blue --limits=memory=500Mi -n ${GUID}-parks-prod
 
 oc new-app ${GUID}-parks-dev/mlbparks:0.0 --name=mlbparks-green --allow-missing-imagestream-tags=true -n ${GUID}-parks-prod
 oc set triggers dc/mlbparks-green --remove-all -n ${GUID}-parks-prod
-oc set resources dc/mlbparks-green --limits=memory=1Gi -n ${GUID}-parks-prod
+oc set resources dc/mlbparks-green --limits=memory=500Mi -n ${GUID}-parks-prod
 
 oc expose dc/mlbparks-green -l type=parksmap-backend --port 8080 -n ${GUID}-parks-prod
 oc expose svc/mlbparks-green --name mlbparks -n ${GUID}-parks-prod
@@ -49,9 +49,9 @@ oc set env dc/mlbparks-green --from=configmap/mlbparks-config -n ${GUID}-parks-p
 oc new-app ${GUID}-parks-dev/nationalparks:0.0 --name=nationalparks-blue --allow-missing-imagestream-tags=true -n ${GUID}-parks-prod
 oc new-app ${GUID}-parks-dev/nationalparks:0.0 --name=nationalparks-green --allow-missing-imagestream-tags=true -n ${GUID}-parks-prod
 oc set triggers dc/nationalparks-blue  --remove-all -n ${GUID}-parks-prod
-oc set resources dc/nationalparks-blue --limits=memory=1Gi -n ${GUID}-parks-prod
+oc set resources dc/nationalparks-blue --limits=memory=500Mi -n ${GUID}-parks-prod
 oc set triggers dc/nationalparks-green --remove-all -n ${GUID}-parks-prod
-oc set resources dc/nationalparks-green --limits=memory=1Gi -n ${GUID}-parks-prod
+oc set resources dc/nationalparks-green --limits=memory=500Mi -n ${GUID}-parks-prod
 oc expose dc/nationalparks-green -l type=parksmap-backend --port 8080 -n ${GUID}-parks-prod
 oc expose svc/nationalparks-green --name nationalparks -n ${GUID}-parks-prod
 
@@ -70,8 +70,8 @@ oc new-app ${GUID}-parks-dev/parksmap:0.0 --name=parksmap-blue --allow-missing-i
 oc new-app ${GUID}-parks-dev/parksmap:0.0 --name=parksmap-green --allow-missing-imagestream-tags=true -n ${GUID}-parks-prod
 oc set triggers dc/parksmap-blue  --remove-all -n ${GUID}-parks-prod
 oc set triggers dc/parksmap-green --remove-all -n ${GUID}-parks-prod
-oc set resources dc/parksmap-blue --limits=memory=1Gi -n ${GUID}-parks-prod
-oc set resources dc/parksmap-green --limits=memory=1Gi -n ${GUID}-parks-prod
+oc set resources dc/parksmap-blue --limits=memory=500Mi -n ${GUID}-parks-prod
+oc set resources dc/parksmap-green --limits=memory=500Mi -n ${GUID}-parks-prod
 oc expose dc/parksmap-green --port 8080 -n ${GUID}-parks-prod
 oc expose svc/parksmap-green --name parksmap -n ${GUID}-parks-prod
 

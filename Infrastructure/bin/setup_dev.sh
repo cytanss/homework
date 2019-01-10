@@ -32,7 +32,7 @@ oc create configmap mlbparks-config -n ${GUID}-parks-dev \
 --from-literal="DB_NAME=parks" \
 --from-literal="APPNAME=MLB Parks (Dev)"
 oc set env dc/mlbparks --from=configmap/mlbparks-config -n ${GUID}-parks-dev
-oc set resources dc/mlbparks --limits=memory=1Gi -n ${GUID}-parks-dev
+oc set resources dc/mlbparks --limits=memory=500Mi -n ${GUID}-parks-dev
 oc set triggers dc/mlbparks --remove-all -n ${GUID}-parks-dev
 oc expose dc mlbparks -l type=parksmap-backend --port 8080 -n ${GUID}-parks-dev
 oc expose svc mlbparks -n ${GUID}-parks-dev
@@ -52,7 +52,7 @@ oc new-build --binary=true --name="nationalparks" redhat-openjdk18-openshift:1.2
 oc new-app ${GUID}-parks-dev/nationalparks:0.0-0 --name=nationalparks --allow-missing-imagestream-tags=true -n ${GUID}-parks-dev
 
 oc set env dc/nationalparks --from=configmap/nationalparks-config -n ${GUID}-parks-dev
-oc set resources dc/nationalparks --limits=memory=1Gi -n ${GUID}-parks-dev
+oc set resources dc/nationalparks --limits=memory=500Mi -n ${GUID}-parks-dev
 oc set triggers dc/nationalparks --remove-all -n ${GUID}-parks-dev
 oc expose dc nationalparks -l type=parksmap-backend --port 8080 -n ${GUID}-parks-dev
 oc expose svc nationalparks -n ${GUID}-parks-dev
@@ -67,7 +67,7 @@ oc new-build --binary=true --name="parksmap" redhat-openjdk18-openshift:1.2 -n $
 oc new-app ${GUID}-parks-dev/parksmap:0.0-0 --name=parksmap --allow-missing-imagestream-tags=true -n ${GUID}-parks-dev
 
 oc set env dc/parksmap --from=configmap/parksmap-config -n ${GUID}-parks-dev
-oc set resources dc/parksmap --limits=memory=1Gi -n ${GUID}-parks-dev
+oc set resources dc/parksmap --limits=memory=500Mi -n ${GUID}-parks-dev
 oc set triggers dc/parksmap --remove-all -n ${GUID}-parks-dev
 oc expose dc parksmap --port 8080 -n ${GUID}-parks-dev
 oc expose svc parksmap -n ${GUID}-parks-dev
