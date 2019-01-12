@@ -20,7 +20,7 @@ node{
   }
 
   stage('Build war') {
-    echo "Building version ${version}"
+    echo "Building war"
     sleep 4
   }
 
@@ -35,7 +35,7 @@ node{
   }
 
   stage('Build and Tag OpenShift Image') {
-    echo "Building OpenShift container image tasks:${devTag}"    
+    echo "Building OpenShift container image "    
   }
 
   stage('Integration Tests') {
