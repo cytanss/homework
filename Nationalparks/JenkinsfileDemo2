@@ -10,8 +10,11 @@ node{
   stage('Switch over to old Version') {
     echo "Switching Production application to Green."
     sh "oc patch route nationalparks -n production -p '{\"spec\":{\"to\":{\"name\":\"nationalparks-green\"}}}'"
-    sleep 5
+    sleep 2
     sh "curl http://parksmap-production.apps.myocp.local/ws/backends/init/"
+    sleep 2
+    sh "curl http://parksmap-production.apps.myocp.local/ws/backends/unregister?endpointName=nationalparks-blue"
+
   }
 }
 
