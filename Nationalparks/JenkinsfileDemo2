@@ -1,0 +1,18 @@
+node{
+  stage('Revert Blue/Green Production Deployment') {
+    echo "Deploying Blue/Green Production"
+      
+      sh "oc expose dc/nationalparks-green -l type=parksmap-backend --port 8080 -n production" 
+      sleep 2
+      
+  }
+
+  stage('Switch over to old Version') {
+    echo "Switching Production application to Green."
+    sh "oc delete svc nationalparks-blue -n production"
+    sh "oc patch route nationalparks -n production -p '{\"spec\":{\"to\":{\"name\":\"nationalparks-green\"}}}'"
+    sleep 5
+    sh "curl http://parksmap-production.apps.myocp.local/ws/backends/init/"
+  }
+}
+
