@@ -14,7 +14,12 @@ node{
     sh "curl http://parksmap-production.apps.myocp.local/ws/backends/init/"
     sleep 2
     sh "curl http://parksmap-production.apps.myocp.local/ws/backends/unregister?endpointName=nationalparks-blue"
-
+    sleep 3
+    sh "oc scale dc/mongodb --replicas=0 -n production"
+    sleep 3
+    sh "oc scale dc/mongodb --replicas=1 -n production"
+    sleep 3
+    sh "curl http://mlbparks-production.apps.myocp.local/ws/data/load/"
   }
 }
 

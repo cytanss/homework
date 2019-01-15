@@ -41,6 +41,7 @@ node{
 
   stage('Integration Tests') {
     echo "Running Integration Tests"
+    sh "curl http://parksmap-production.apps.myocp.local/ws/data/load"
     sleep 3    
   }
 
