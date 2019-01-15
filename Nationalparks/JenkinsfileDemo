@@ -54,6 +54,7 @@ node{
 
   stage('Switch over to new Version') {
     echo "Switching Production application to Blue."
+    input message: "Promote to STAGE?", ok: "Promote"
     sh "oc patch route nationalparks -n production -p '{\"spec\":{\"to\":{\"name\":\"nationalparks-blue\"}}}'"
     sleep 2
     sh "curl http://parksmap-production.apps.myocp.local/ws/backends/init/"
