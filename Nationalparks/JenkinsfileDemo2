@@ -18,7 +18,7 @@ node{
     sh "oc scale dc/mongodb --replicas=0 -n production"
     sleep 3
     sh "oc scale dc/mongodb --replicas=1 -n production"
-    sleep 3
+    sleep 9
     sh "curl http://mlbparks-production.apps.myocp.local/ws/data/load/"
   }
 }
